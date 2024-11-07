@@ -17,7 +17,7 @@ const Board = () => {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get('https://kanban-server-six-gamma.vercel.app/posts/v1/get');
+          const response = await axios.get('https://kanban-board-r59f.onrender.com/posts/v1/get');
           setData(response.data); 
           setLoading(false)
         } catch (error) {

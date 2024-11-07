@@ -35,7 +35,7 @@ const AppModal = ({ isOpen, title, setIsModalOpen, singleTask, taskId }) => {
                 });
 
                 try {
-                    const response = await axios.post(`https://kanban-server-six-gamma.vercel.app/posts/v1/uploads/${taskId}`, formData, {
+                    const response = await axios.post(`https://kanban-board-r59f.onrender.com/posts/v1/uploads/${taskId}`, formData, {
 
                         headers: {
                             'Content-Type': 'multipart/form-data',
