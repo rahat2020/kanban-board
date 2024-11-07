@@ -35,14 +35,14 @@ const AppModal = ({ isOpen, title, setIsModalOpen, singleTask, taskId }) => {
                 });
 
                 try {
-                    const response = await axios.post(`http://localhost:5000/posts/v1/uploads/${taskId}`, formData, {
+                    const response = await axios.post(`https://kanban-server-six-gamma.vercel.app/posts/v1/uploads/${taskId}`, formData, {
+
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
                     });
                     if (response) {
                         setResponseMessage(response.data.message);
-                        await axios.get('http://localhost:5000/posts/v1/get');
                     }
                 } catch (error) {
                     setResponseMessage('Error uploading files: ' + error.response?.data?.message || error.message);
