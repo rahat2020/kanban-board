@@ -14,4 +14,5 @@ pnpm dev
 bun dev
 ```
 Server code: https://github.com/rahat2020/kanban-server
-Live link: https://kanban-board-three-delta.vercel.app/
+
+# Live link [`Kanban board`](https://kanban-board-three-delta.vercel.app/)
