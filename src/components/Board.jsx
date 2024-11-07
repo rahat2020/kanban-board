@@ -1,23 +1,38 @@
 import AppAvatar from '@/UI/AppAvatar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Briefcase, Calendar, Clock, MapPin } from 'react-feather'
 import StatusCard from './StatusCard'
 import AppSpinner from '@/UI/AppSpiners'
-import { customersData } from '@/data/customersData'
+import axios from 'axios'
 
 const Board = () => {
-    const [data] = useState(customersData || [])
-    const isInitialLoading = false
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
     const type = 'full time'
     const department = 'Starlink'
     const hiringTeams = ''
     const projectDuration = '12 months'
     const location = 'England'
     const projectEndDate = '10/12/2024'
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/posts/v1/get');
+          setData(response.data); 
+          setLoading(false)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData();
+      }, []); 
+
     return (
         <div>
             <div className="mx-4 md:mx-8 mt-5 md:mt-8 md:overflow-y-hidden">
-                {!isInitialLoading ? (
+                {!loading ? (
                     <div className="mt-2 bg-white rounded-lg">
                         <div className="bg-white p-1 rounded-lg">
                             {/* board header */}
@@ -35,13 +50,13 @@ const Board = () => {
                                         )}
                                         {type && (
                                             <span className="flex gap-1.5 items-center text-14 font-normal text-regular">
-                                                <Clock className="w-4 h-4 text-regular"/>
+                                                <Clock className="w-4 h-4 text-regular" />
                                                 {projectDuration}
                                             </span>
                                         )}
                                         {location && (
                                             <span className="flex gap-1.5 items-center text-14 font-normal text-regular">
-                                                <MapPin className="w-4 h-4 text-regular"/>
+                                                <MapPin className="w-4 h-4 text-regular" />
                                                 {location}
                                             </span>
                                         )}
@@ -51,7 +66,7 @@ const Board = () => {
                                                     Project end date:
                                                 </span>
                                                 <span className="flex gap-1.5 items-center text-14 font-normal text-yellow">
-                                                    <Calendar className="w-4 h-4 "/> 10-12-2024
+                                                    <Calendar className="w-4 h-4 " /> 10-12-2024
                                                 </span>
                                             </div>
                                         )}
@@ -72,7 +87,7 @@ const Board = () => {
 
                             {/*  candidates  */}
                             <div className="border flex overflow-x-auto scroll-smooth focus:scroll-auto">
-                                {data?.map((item) => (
+                                {data && data?.map((item) => (
                                     <StatusCard
                                         taskData={item}
                                         key={item?.id}

@@ -30,7 +30,7 @@ const StatusCard = ({ taskData }) => {
             case 'Completed':
                 return size(params);
             default:
-                return '';
+                return 0;
         }
     }
 
@@ -57,6 +57,7 @@ const StatusCard = ({ taskData }) => {
                                 {tasks && tasks.map((singleTask) => (
                                     <CardItems
                                         key={singleTask?.id}
+                                        taskData={taskData}
                                         singleTask={singleTask}
                                         singleTaskID={singleTask?.id}
                                     />

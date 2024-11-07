@@ -1,25 +1,19 @@
 import React, { useState } from 'react'
-import Loader from '../UI/Loader'
-import AppAvatar from '../UI/AppAvatar'
-import { Calendar, Link, MessageCircle, Star } from 'react-feather'
-import dayjs from 'dayjs'
-import { truncateText } from '@/utils/appHelpers'
+import { Calendar, Link, MessageCircle } from 'react-feather'
 import Image from 'next/image'
 import AppModal from '@/UI/AppModal'
+import { size } from 'lodash'
 
 const avatar = 'https://www.cecyteo.edu.mx/Nova/App_themes/Nova2015/assets/admin/pages/media/profile/profile_user.jpg';
 
 
-const CardItems = ({ singleTask, singleTaskID }) => {
-    const { id, taskName, taskDesc, createdAt, name, desc, clientName, clientAvatar } = singleTask || {};
-
+const CardItems = ({ singleTask, taskData }) => {
+    const { taskDesc, clientName, clientAvatar } = singleTask || {};
+    const { totalAttachments } = taskData || {}
     const [isModalOpen, setIsModalOpen] = useState(false);
-    console.log("🚀 ~ CardItems ~ isModalOpen:", isModalOpen)
-
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
-
     return (
         <div className='p-2'>
             <div className="bg-white border py-4 p-4 rounded-lg shadow-md w-80">
@@ -93,7 +87,7 @@ const CardItems = ({ singleTask, singleTaskID }) => {
                             tabIndex={0}
                             className="text-sm text-gray-600 flex items-center">
                             <Link className='w-4 h-4' />
-                            25
+                            {size(totalAttachments) || 0}
                         </span>
 
                         <div className="flex items-center">
@@ -107,6 +101,8 @@ const CardItems = ({ singleTask, singleTaskID }) => {
                 isModalOpen &&
                 <AppModal
                     isOpen
+                    singleTask={singleTask}
+                    taskId={taskData?._id}
                     setIsModalOpen={setIsModalOpen}
                 />
             }
