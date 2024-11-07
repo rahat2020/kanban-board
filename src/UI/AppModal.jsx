@@ -51,7 +51,7 @@ const AppModal = ({ isOpen, title, setIsModalOpen, singleTask, taskId }) => {
 
             uploadFiles();
         }
-    }, [files, _id]);
+    }, [files, _id, taskId]);
 
     return (
         <div>

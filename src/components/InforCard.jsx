@@ -1,6 +1,7 @@
 import AppAvatar from '@/UI/AppAvatar'
 import Loader from '@/UI/Loader'
 import React from 'react'
+import { Star, Calendar } from 'react-feather';
 
 const InforCard = () => {
     const loading = false
@@ -33,7 +34,7 @@ const InforCard = () => {
             <div className="flex gap-3 items-center">
               {avg_rating && (
                 <span className="text-yellow flex gap-1 items-center">
-                  <Star className="fill-yellow w-3 h-3" /> {`${avg_rating}(${total_review})`}
+                  <Star  className="fill-yellow w-3 h-3" /> {`${avg_rating}(${total_review})`}
                 </span>
               )}
               {createdAt && (
